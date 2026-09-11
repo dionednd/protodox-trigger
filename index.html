@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Protodox Trigger - Home</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+	<button class="sound-toggle" aria-label="Toggle Sound" data-muted="true">
+	<img src="images/sound-off.png" class="sound-icon" alt="Sound Off Icon">
+	</button>
+
+	<div class="scene" aria-hidden="true">
+		<div class="sky"></div>
+		<div class="ground"></div>
+		<div class="trees" aria-hidden="true"></div>
+		<div class="char-wrap" data-char="knight" aria-hidden="true">
+			<span class="char-name"></span>
+			<div class="knight idle"></div>
+		</div>
+		 <div class="char-wrap" data-char="darkin" aria-hidden="true">
+			<span class="char-name"></span>
+			<div class="darkin idle"></div>
+		</div>
+		<div class="char-wrap" data-char="dweller" aria-hidden="true">
+			<span class="char-name"></span>
+			<div class="dweller idle"></div>
+		</div>
+		<div class="char-wrap" data-char="cyclops" aria-hidden="true">
+			<span class="char-name"></span>
+			<div class="cyclops idle"></div>
+		</div>
+	</div>
+
+	<main class="content">
+		<img src="images/protodox-trigger.png" class="logo" alt="Protodox Trigger Logo">
+		<p class="copyright">Copyright &copy; 2026 dionednd. All rights reserved.</p>
+	</main>
+
+	<script src="script.js"></script>
+
+</body>
+</html>

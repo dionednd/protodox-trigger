@@ -1,0 +1,236 @@
+	:root {
+		--sky-top: #3d8fe0;
+		--sky-bottom: #bfe6ff;
+		--ground-height: clamp(64px, 13vh, 150px);
+		--knight-size: clamp(56px, 9vw, 130px);
+		--art-px: calc(var(--knight-size) / 64);
+		--knight-w: calc(var(--art-px) * 64);
+		--knight-h: calc(var(--art-px) * 64);
+		--darkin-w: calc(var(--art-px) * 17);
+		--darkin-h: calc(var(--art-px) * 17);
+		--dweller-w: calc(var(--art-px) * 64);
+		--dweller-h: calc(var(--art-px) * 64);
+		--cyclops-w: calc(var(--art-px) * 64);
+		--cyclops-h: calc(var(--art-px) * 64);
+		--pixel-outline-w: clamp(1px, 0.2vw, 2px);
+	}
+
+	* { box-sizing: border-box; }
+
+	html, body {
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+		min-height: 100dvh;
+	}
+
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+		position: relative;
+	}
+
+	.scene {
+		position: fixed;
+		inset: 0;
+		z-index: 0;
+		overflow: hidden;
+	}
+
+	.sky {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+	}
+
+	.ground {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: calc(var(--ground-height) - 0.8px);
+		background-color: #040404;
+		overflow: visible;
+	}
+
+	.ground::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		z-index: 1;
+		top: calc((var(--art-px) * -4)); 
+		height: calc(var(--art-px) * 4); 
+		background-image: url('images/ground-tuft.png');
+		background-repeat: repeat-x;
+		background-position: left 0 top 0; 
+		background-size: calc(var(--art-px) * 16) calc(var(--art-px) * 4);
+		image-rendering: pixelated;
+	}
+
+	.trees {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: calc(var(--ground-height) - 1px);
+		pointer-events: none;
+	}
+
+	.tree {
+		position: absolute;
+		bottom: 0;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		image-rendering: pixelated;
+	}
+
+	.char-wrap {
+		position: absolute;
+		bottom: var(--ground-height);
+		pointer-events: none;
+	}
+
+	.char-wrap[data-char="knight"]  { width: var(--knight-w);  height: var(--knight-h);  left: 60vw; }
+	.char-wrap[data-char="darkin"]  { width: var(--darkin-w);  height: var(--darkin-h);  left: 30vw; }
+	.char-wrap[data-char="dweller"] { width: var(--dweller-w); height: var(--dweller-h); left: 60vw; }
+	.char-wrap[data-char="cyclops"] { width: var(--cyclops-w); height: var(--cyclops-h); left: 60vw; }
+
+	.char-name {
+		position: absolute;
+		left: 50%;
+		bottom: 32px;
+		transform: translateX(-50%) scale(0.5);
+		margin-bottom: calc(var(--art-px) * 2);
+		white-space: nowrap;
+		font-size: clamp(0.5rem, 1vw, 0.7rem);
+	}
+
+	.char-name, .copyright {
+		font-family: 'Press Start 2P', 'Courier New', monospace;
+		color: #fff;
+		text-shadow:
+			calc(var(--pixel-outline-w) * -1) calc(var(--pixel-outline-w) * -1) 0 #000,
+			0 calc(var(--pixel-outline-w) * -1) 0 #000,
+			var(--pixel-outline-w) calc(var(--pixel-outline-w) * -1) 0 #000,
+			calc(var(--pixel-outline-w) * -1) 0 0 #000,
+			var(--pixel-outline-w) 0 0 #000,
+			calc(var(--pixel-outline-w) * -1) var(--pixel-outline-w) 0 #000,
+			0 var(--pixel-outline-w) 0 #000,
+			var(--pixel-outline-w) var(--pixel-outline-w) 0 #000;
+	}
+
+	.knight, .darkin, .dweller, .cyclops {
+		position: absolute;
+		inset: 0;
+		background-repeat: no-repeat;
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
+		transform-origin: center bottom;
+	}
+
+	.knight.run {
+		background-image: url('images/knight-run.png');
+		background-size: 800% 100%;
+	}
+
+	.knight.idle {
+		background-image: url('images/knight-idle.png');
+		background-size: 200% 100%;
+	}
+
+	.darkin.run {
+		background-image: url('images/darkin-run.png');
+		background-size: 300% 100%;
+	}
+
+	.darkin.idle {
+		background-image: url('images/darkin-idle.png');
+		background-size: 400% 100%;
+	}
+
+	.dweller.run {
+		background-image: url('images/dweller-run.png');
+		background-size: 800% 100%;
+	}
+
+	.dweller.idle {
+		background-image: url('images/dweller-idle.png');
+		background-size: 200% 100%;
+	}
+
+	.cyclops.run {
+		background-image: url('images/cyclops-run.png');
+		background-size: 800% 100%;
+	}
+
+	.cyclops.idle {
+		background-image: url('images/cyclops-idle.png');
+		background-size: 200% 100%;
+	}
+
+	.sound-toggle {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		z-index: 100;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 8px;
+		image-rendering: pixelated;
+	}
+
+	.sound-icon {
+		width: calc(var(--art-px) * 18); 
+		height: calc(var(--art-px) * 18);
+	}
+
+	.sound-toggle:hover {
+		transform: scale(1.1);
+	}
+	.sound-toggle:active {
+		transform: scale(1.0);
+	}
+
+	.logo {
+		display: block;
+		width: 50%; 
+		z-index: 1;
+		max-width: 100%;
+		height: auto;
+		margin: 0 auto; 
+		image-rendering: pixelated; 
+		image-rendering: crisp-edges; 
+	}
+
+	.copyright {
+		transform: scale(0.5);
+		position: absolute;
+		top: 315px;
+		right: 35px;
+		width: 100%;
+		max-width: 100%;
+		margin: 0.75rem auto 0;
+		text-align: right;
+		line-height: 1.6;
+	}
+
+	.content {
+		position: relative;
+		z-index: 1;
+		min-height: 100vh;
+		min-height: 100dvh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 2rem clamp(1.5rem, 6vw, 4rem);
+		padding-bottom: calc(var(--ground-height) + 2rem);
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(1.9rem, 5vw, 3.4rem);
+		font-weight: 800;
+		letter-spacing: -0.01em;
+		color: #fff;
+		text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+	}
